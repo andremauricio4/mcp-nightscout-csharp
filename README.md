@@ -1,6 +1,6 @@
-# C# .NET MCP Server SSE on Photon OS
+# C# .NET MCP Server SSE
 
-A Model Context Protocol (MCP) server implementation using C# .NET 8.0, designed to run on Photon OS with Server-Sent Events (SSE) support.
+A Model Context Protocol (MCP) server implementation using C# .NET 8.0 with Server-Sent Events (SSE) support.
 
 ## Overview
 
