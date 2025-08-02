@@ -17,7 +17,7 @@ This MCP server provides tools that can be accessed via the Model Context Protoc
 
 - `Program.cs` - Main application entry point and configuration
 - `McpServer.csproj` - Project file with dependencies
-- `Tools/GreetingTools.cs` - Example MCP tool implementation
+- `Tools/*Tool.cs` - MCP tool implementation
 - `appsettings.json` - Application configuration
 - `appsettings.Development.json` - Development-specific settings
 
