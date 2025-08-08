@@ -18,7 +18,7 @@ public sealed class GetLatestBasalTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the latest Basal Insulin administrations (amount in units or \"u\")")]
+    [McpServerTool, Description("Gets the latest Basal/Slow-acting Insulin administration records with time and amount (amount in units or \"u\")")]
     public async Task<string> GetBasalInsulin(int count = 12)
     {
         try

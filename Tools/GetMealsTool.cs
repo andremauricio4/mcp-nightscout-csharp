@@ -18,8 +18,9 @@ public sealed class GetLatestMealsTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the logged meals (includes carbs amount in grams/\"g\", and meal description)")]
-    public async Task<string> GetMeals(int count = 12)
+    [McpServerTool, Description("Gets the logged meals (includes carbs amount in grams/\"g\", and meal description)")]
+    public async Task<string> GetMeals(
+        [Description("Number of meal records to return (default: 12)")] int count = 12)
     {
         try
         {

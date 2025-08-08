@@ -17,8 +17,9 @@ public sealed class GetLatestEntriesTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays past blood glucose values (milligrams per deciliter or \"mg/dL\")")]
-    public async Task<string> GetBloodGlucose(int count = 12)
+    [McpServerTool, Description("Gets the past blood glucose values (milligrams per deciliter or \"mg/dL\")")]
+    public async Task<string> GetBloodGlucose(
+        [Description("Number of blood glucose records to return (default: 12)")] int count = 12)
     {
         try
         {

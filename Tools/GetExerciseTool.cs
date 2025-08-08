@@ -18,8 +18,9 @@ public sealed class GetLatestExerciseTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the logged exercise (includes exercise description)")]
-    public async Task<string> GetExercise(int count = 12)
+    [McpServerTool, Description("Gets the logged exercise records (includes exercise description)")]
+    public async Task<string> GetExercise(
+        [Description("Number of exercise records to return (default: 12)")] int count = 12)
     {
         try
         {

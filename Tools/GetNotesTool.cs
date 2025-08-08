@@ -18,8 +18,9 @@ public sealed class GetLatestNotesTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the logged notes")]
-    public async Task<string> GetNotes(int count = 12)
+    [McpServerTool, Description("Gets the logged notes")]
+    public async Task<string> GetNotes(
+        [Description("Number of Note records to return (default: 12)")] int count = 12)
     {
         try
         {

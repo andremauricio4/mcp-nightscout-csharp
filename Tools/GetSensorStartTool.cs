@@ -19,12 +19,13 @@ public sealed class GetSensorStartTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays when a new sensor was put on the patient's body and started recording data")]
-    public async Task<string> GetSensorStart(int count = 12)
+    [McpServerTool, Description("Gets the date and time when new sensors were put on the patient's body and started recording data")]
+    public async Task<string> GetSensorStart(
+        [Description("Maximum number of months to return records for (default: 1)")] int months = 1)
     {
         try
         {
-            var treatments = await _nightscoutService.GetTreatmentsAsync("Sensor Start", count);
+            var treatments = await _nightscoutService.GetTreatmentsByDaysAsync("Sensor Start", 100, -30*months, 0);
 
             if (!treatments.Any())
             {
@@ -53,7 +54,7 @@ public sealed class GetSensorStartTool
                             var nextTime = NightscoutService.FormatDateTimeString(dayTreatments[i + 1].CreatedAt);
                             var diff = nextTime - currentTime;
 
-                            if (diff.TotalMinutes <= 3)
+                            if (diff.TotalMinutes <= 30)
                             {
                                 // Skip current, keep next
                                 continue;
@@ -74,10 +75,16 @@ public sealed class GetSensorStartTool
                 });
 
             var result = string.Join("\n\n", groupedByDate.Select(group =>
-                $"Date: {group.Date:yyyy-MM-dd}\n" +
-                "Time\n" +
                 string.Join("\n", group.Treatments.Select(treatment =>
-                    $"{NightscoutService.FormatDateTimeString(treatment.CreatedAt):HH:mm}"))));
+                {
+                    var createdAt = NightscoutService.FormatDateTimeString(treatment.CreatedAt);
+                    var timeSince = DateTime.Now - createdAt;
+                    var daysSince = timeSince.Days;
+                    var hoursSince = timeSince.Hours;
+                    var minutesSince = timeSince.Minutes;
+                    var sensorInfo = daysSince < 14 ? $" - current sensor (applied and started {daysSince} days {hoursSince}h:{minutesSince}m ago)" : "";
+                    return $"Datetime: {createdAt:yyyy-MM-dd HH:mm}{sensorInfo}";
+                }))));
 
             return result;
 

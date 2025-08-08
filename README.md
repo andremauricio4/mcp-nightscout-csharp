@@ -41,10 +41,32 @@ The server will start and listen on `http://0.0.0.0:8089`
 
 ## Available Tools
 
-### Echo Tool
-- **Description**: Says Hello to a user
-- **Parameter**: `username` (string) - The name of the user to greet
-- **Returns**: A greeting message
+The server auto-discovers MCP tools from the current assembly. Below are the available tools (tool names match method names):
+
+| Tool | Description | Parameters | Returns |
+| --- | --- | --- | --- |
+| `GetBloodGlucose` | Gets the past blood glucose values (mg/dL) | `count: int` (default: 12) | `string` (human-readable table grouped by date) |
+| `GetActiveTreatments` | Gets active treatments still affecting BG | `referenceDateString: string?` | `string` (grouped by date) |
+| `DeleteTreatment` | Deletes a treatment by its ID | `_id: string` | `string` (success/failure message) |
+| `GetBasalInsulin` | Gets latest basal (slow-acting) insulin records | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetFingerPrickCapillaryGlucometerChecks` | Gets finger-prick/capillary glucometer BG checks | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetInsulinBoluses` | Gets latest bolus insulin records | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetExercise` | Gets logged exercise records | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetMeals` | Gets logged meals (carbs and description) | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetNotes` | Gets logged notes | `count: int` (default: 12) | `string` (grouped by date) |
+| `GetSensorStart` | Gets dates/times when sensors were started | `months: int` (default: 1) | `string` (per-event lines) |
+| `PredictFutureEntries` | Predicts future BG values (mg/dL) | `pastEntries: int` (default: 12), `forecastMinutes: int` (default: 60), `cone: bool` (default: false), `coneFactor: double` (default: 2.0) | `string` (forecast table; includes cone bands if enabled) |
+| `RecordBasalInsulin` | Records basal insulin administration | `absolute: double?` (units), `duration: int?` (default: 1440), `notesDescription: string?`, `eventTime: string?` (`yyyy-MM-dd HH:mm`, Europe/Lisbon) | `string` (success/failure with treatment ID) |
+| `RecordBolusInsulin` | Records bolus insulin administration | `insulin: double?`, `notesDescription: string?`, `eventTime: string?` | `string` (success/failure with treatment ID) |
+| `RecordExercise` | Records exercise activity | `duration: int?`, `notesDescription: string?`, `eventTime: string?` | `string` (success/failure with treatment ID) |
+| `RecordFingerPrickCapillaryGlucometerCheck` | Records finger-prick/capillary glucometer BG check | `glucose: int` (mg/dL), `eventTime: string?` | `string` (success/failure with treatment ID) |
+| `RecordFood` | Records food intake with carbs | `carbs_g: double?`, `notesDescription: string?`, `eventTime: string?` | `string` (success/failure with treatment ID) |
+| `RecordNotes` | Records a note/event | `notesDescription: string`, `eventTime: string?` | `string` (success/failure with treatment ID) |
+
+Notes:
+- All returned values are human-readable strings optimized for chat display.
+- Where applicable, quantities use mg/dL for glucose and international units (u) for insulin.
+- `eventTime` parameters are optional and, when provided, must be in `yyyy-MM-dd HH:mm` using Europe/Lisbon local time.
 
 ## Configuration
 

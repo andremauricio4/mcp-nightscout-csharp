@@ -18,8 +18,9 @@ public sealed class GetLatestBloodGlucoseChecksTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the finger prick/capillary/glucometer blood glucose checks")]
-    public async Task<string> GetBloodGlucoseChecks(int count = 12)
+    [McpServerTool, Description("Gets the specific finger prick/capillary/glucometer manual blood glucose checks")]
+    public async Task<string> GetFingerPrickCapillaryGlucometerChecks(
+        [Description("Number of records to return (default: 12)")] int count = 12)
     {
         try
         {

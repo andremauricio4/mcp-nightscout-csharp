@@ -14,7 +14,7 @@ namespace Models
         public string CreatedAt { get; set; } = string.Empty;
 
         [JsonPropertyName("carbs")]
-        public int? Carbs { get; set; }
+        public double? Carbs { get; set; }
 
         [JsonPropertyName("insulin")]
         public double? Insulin { get; set; }
@@ -28,17 +28,11 @@ namespace Models
         [JsonPropertyName("enteredBy")]
         public string EnteredBy { get; set; } = string.Empty;
 
-        [JsonPropertyName("type")]
-        public string Type { get; set; } = string.Empty;
+        [JsonPropertyName("glucoseType")]
+        public string GlucoseType { get; set; } = string.Empty;
 
         [JsonPropertyName("duration")]
         public double? Duration { get; set; }
-
-        [JsonPropertyName("rate")]
-        public double? Rate { get; set; }
-
-        [JsonPropertyName("basal")]
-        public double? Basal { get; set; }
 
         [JsonPropertyName("absolute")]
         public double? Absolute { get; set; }

@@ -18,8 +18,9 @@ public sealed class GetLatestBolusesTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Displays the latest insulin boluses amount (units or \"u\")")]
-    public async Task<string> GetInsulinBoluses(int count = 12)
+    [McpServerTool, Description("Gets the latest insulin boluses administration record with time and amount (amount in units or \"u\")")]
+    public async Task<string> GetInsulinBoluses(
+        [Description("Number of insulin boluses records to return (default: 12)")] int count = 12)
     {
         try
         {
