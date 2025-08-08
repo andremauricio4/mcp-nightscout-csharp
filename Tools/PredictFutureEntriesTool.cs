@@ -24,8 +24,12 @@ public sealed class PredictFutureEntriesTool
         _logger = logger;
     }
 
-    [McpServerTool, Description("Returns predicted blood glucose values (milligrams per deciliter or \"mg/dL\")")]
-    public async Task<string> PredictFutureEntries(int pastEntries = 12, int forecastMinutes = 60, bool cone = false, double coneFactor = 2.0)
+    [McpServerTool, Description("Gets the predicted blood glucose values (milligrams per deciliter or \"mg/dL\")")]
+    public async Task<string> PredictFutureEntries(
+        [Description("Number of past entries to be used for the prediction (default: 12)")] int pastEntries = 12,
+        [Description("Prediction window in minutes (default: 60)")] int forecastMinutes = 60,
+        [Description("If the result should include the confidence bands (default: false)")] bool cone = false,
+        [Description("Factor for the confidence bands (default: 2.0)")] double coneFactor = 2.0)
     {
         try
         {
