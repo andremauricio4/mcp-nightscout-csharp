@@ -10,8 +10,7 @@ This MCP server provides tools that can be accessed via the Model Context Protoc
 
 - **HTTP Transport**: Uses HTTP with Server-Sent Events for communication
 - **Tool Discovery**: Automatically discovers and registers tools from the current assembly
-- **Greeting Tool**: Simple example tool that provides greeting functionality
-- **Cross-Platform**: Built on .NET 8.0, can run on various platforms including Photon OS
+- **Cross-Platform**: Built on .NET 8.0, can run on various platforms including Linux
 
 ## Project Structure
 
@@ -46,7 +45,6 @@ The server auto-discovers MCP tools from the current assembly. Below are the ava
 | Tool | Description | Parameters | Returns |
 | --- | --- | --- | --- |
 | `GetBloodGlucose` | Gets the past blood glucose values (mg/dL) | `count: int` (default: 12) | `string` (human-readable table grouped by date) |
-| `GetActiveTreatments` | Gets active treatments still affecting BG | `referenceDateString: string?` | `string` (grouped by date) |
 | `DeleteTreatment` | Deletes a treatment by its ID | `_id: string` | `string` (success/failure message) |
 | `GetBasalInsulin` | Gets latest basal (slow-acting) insulin records | `count: int` (default: 12) | `string` (grouped by date) |
 | `GetFingerPrickCapillaryGlucometerChecks` | Gets finger-prick/capillary glucometer BG checks | `count: int` (default: 12) | `string` (grouped by date) |
@@ -55,7 +53,6 @@ The server auto-discovers MCP tools from the current assembly. Below are the ava
 | `GetMeals` | Gets logged meals (carbs and description) | `count: int` (default: 12) | `string` (grouped by date) |
 | `GetNotes` | Gets logged notes | `count: int` (default: 12) | `string` (grouped by date) |
 | `GetSensorStart` | Gets dates/times when sensors were started | `months: int` (default: 1) | `string` (per-event lines) |
-| `PredictFutureEntries` | Predicts future BG values (mg/dL) | `pastEntries: int` (default: 12), `forecastMinutes: int` (default: 60), `cone: bool` (default: false), `coneFactor: double` (default: 2.0) | `string` (forecast table; includes cone bands if enabled) |
 | `RecordBasalInsulin` | Records basal insulin administration | `absolute: double?` (units), `duration: int?` (default: 1440), `notesDescription: string?`, `eventTime: string?` (`yyyy-MM-dd HH:mm`, Europe/Lisbon) | `string` (success/failure with treatment ID) |
 | `RecordBolusInsulin` | Records bolus insulin administration | `insulin: double?`, `notesDescription: string?`, `eventTime: string?` | `string` (success/failure with treatment ID) |
 | `RecordExercise` | Records exercise activity | `duration: int?`, `notesDescription: string?`, `eventTime: string?` | `string` (success/failure with treatment ID) |
