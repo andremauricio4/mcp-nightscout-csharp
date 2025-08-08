@@ -1,4 +1,4 @@
-# C# .NET MCP Server SSE
+# C# .NET Nightscout MCP Http Server (SSE)
 
 A Model Context Protocol (MCP) server implementation using C# .NET 8.0 with Server-Sent Events (SSE) support.
 
